@@ -78,7 +78,7 @@
                              
                              tr += ` <tr>
                                             <td>`+element.id+`</td>
-                                            <td>`+element.title+`</td>
+                                            <td>`+element.titel+`</td>
                                             <td>`+element.description+`</td>
                                             <td>`+element.pageCount+`</td>
                                             <td>`+element.publishDate+`</td>
@@ -115,16 +115,16 @@
              document.addEventListener('click',function(e){
               console.log(e);
                 if(e.target.classList.contains('a_view')){
-                 console.log('yes');
-                 console.log('okokokok'); 
+                // console.log('yes');
+                // console.log('okokokok'); 
                  let id = e.target.closest('tr').querySelector('td:first-child').innerHTML;
-                 let title = e.target.closest('tr').querySelector('td:nth-child(2)').innerHTML;
+                 let titel = e.target.closest('tr').querySelector('td:nth-child(2)').innerHTML;
                  let description = e.target.closest('tr').querySelector('td:nth-child(3)').innerHTML;
                  let pageCount = e.target.closest('tr').querySelector('td:nth-child(4)').innerHTML;
                  let publishDate = e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML;
 
 
-                 console.log(e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML);
+                  console.log(e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML);
                  console.log(e.target.closest('tr').querySelector('td:nth-child(4)').innerHTML);
                  console.log(e.target.closest('tr').querySelector('td:nth-child(3)').innerHTML);
                  console.log(e.target.closest('tr').querySelector('td:nth-child(2)').innerHTML);
@@ -140,7 +140,31 @@
 
                 /* }else{
                  console.log('no'); */
-               }  
+               }
+               if(e.target.classList.contains('a_del')){
+              //   console.log('yes');  
+                 var delid = e.target.closest('tr').querySelector('td:first-child').innerHTML; 
+                 $.ajax({
+                   url:'"https://fakerestapi.azurewebsites.net/api/v1/Books/1" '+ delid,
+                   type:' DELETE',
+                   beforeSend:function(){
+                    
+                   },
+                   success:function(result,status,xhr){
+                    alert('csdgdmhl');
+                  
+
+                   },
+                   error:function(xhr,status,result){
+
+                   },
+                   complete:function(){
+
+                   }
+
+                 });
+
+               }
                 
              });
 
