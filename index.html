@@ -35,6 +35,32 @@
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
+                <div>
+                    <h5 class="modal-title" id="exampleModalLabel">Book Edit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Title</label>
+                        <input type="text" class="form-control n-title" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text"></div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Description</label>
+                        <textarea class="form-control n-description" rows="10"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Ecerpt</label>
+                        <textarea class="form-control n-excerpt" rows="5"></textarea>
+                      </div>
+                      <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Page Count</label>
+                          <input type="number" class="form-control n-pageCount" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text"></div>
+                        </div>
+                      <button type="submit" class="btn btn-primary n-update">Update</button>
+                  </form>
               </div>
             </div>
           </div>
@@ -79,7 +105,7 @@
                              
                              tr += ` <tr>
                                             <td>`+element.id+`</td>
-                                            <td>`+element.titel+`</td>
+                                            <td>`+element.title+`</td>
                                             <td>`+element.description+`</td>
                                             <td>`+element.pageCount+`</td>
                                             <td>`+element.publishDate+`</td>
@@ -119,7 +145,7 @@
                 // console.log('yes');
                 // console.log('okokokok'); 
                  let id = e.target.closest('tr').querySelector('td:first-child').innerHTML;
-                 let titel = e.target.closest('tr').querySelector('td:nth-child(2)').innerHTML;
+                 let title = e.target.closest('tr').querySelector('td:nth-child(2)').innerHTML;
                  let description = e.target.closest('tr').querySelector('td:nth-child(3)').innerHTML;
                  let pageCount = e.target.closest('tr').querySelector('td:nth-child(4)').innerHTML;
                  let publishDate = e.target.closest('tr').querySelector('td:nth-child(5)').innerHTML;
@@ -134,7 +160,7 @@
 
 
                document.querySelector('.A1').innerHTML = id;
-               document.querySelector('.A2').innerHTML = titel;
+               document.querySelector('.A2').innerHTML = title;
                document.querySelector('.A3').innerHTML = description;
                document.querySelector('.A4').innerHTML = pageCount;
                document.querySelector('.A5').innerHTML = publishDate;
@@ -144,11 +170,21 @@
                }
   
                document.addEventListener('click',function(e){ //e = event
+               e.preventDefault();
                 console.log(e);
                 if(e.target.classList.contains('a_del')){
                     console.log('yes');
                   
                     var userid = e.target.closest('tr').querySelector('td:first-child').innerHTML;
+                     swal({
+                          title: "Are you sure?",
+                          text: "!",
+                          icon: "warning",
+                          buttons: true,
+                          dangerMode: true,
+                        })
+                  
+
                     
                    
                     e.target.closest('tr').remove(); 
@@ -157,7 +193,7 @@
                         url:myobj.url+'/api/v1/Books'+userid,
                         beforeSend:function(){},
                         success:function(result,status,xhr){
-                          swal("Good job!", "Book information deleted Succefully!", "error");
+                          swal("Good job!", "Book information deleted Succefully!",  "error");
                             
                         },
                         error:function(){
